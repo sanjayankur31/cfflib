@@ -39,8 +39,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Connectome File Format Library'
-copyright = u'2010, EPFL & UNIL-CHUV'
+project = 'Connectome File Format Library'
+copyright = '2010, EPFL & UNIL-CHUV'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -174,8 +174,8 @@ htmlhelp_basename = 'ConnectomeFileFormatLibrarydoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'ConnectomeFileFormatLibrary.tex', u'Connectome File Format Library Documentation',
-   u'Stephan Gerhard', 'manual'),
+  ('index', 'ConnectomeFileFormatLibrary.tex', 'Connectome File Format Library Documentation',
+   'Stephan Gerhard', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

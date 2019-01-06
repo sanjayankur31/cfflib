@@ -80,7 +80,7 @@ def test_cnetwork_nxgraph():
     n = CNetwork('Test network')
     n.update_metadata({'number':1024})
     assert_equal(n.get_name(), 'Test network')
-    assert_true(n.get_metadata_as_dict().has_key('number'))
+    assert_true('number' in n.get_metadata_as_dict())
     assert_equal(n.get_metadata_as_dict()['number'], '1024')
     
     g = nx.Graph()
@@ -166,9 +166,9 @@ def test_desc_meta():
     n = CNetwork()
     n.update_metadata({'m0':'v0', 'm1':'v1', 'm2':121})
     assert_not_equal(n.get_metadata_as_dict(), None)
-    assert_true(n.get_metadata_as_dict().has_key('m0'))
-    assert_true(n.get_metadata_as_dict().has_key('m1'))
-    assert_true(n.get_metadata_as_dict().has_key('m2'))
+    assert_true('m0' in n.get_metadata_as_dict())
+    assert_true('m1' in n.get_metadata_as_dict())
+    assert_true('m2' in n.get_metadata_as_dict())
     assert_equal(n.get_metadata_as_dict()['m0'], 'v0')
     assert_equal(n.get_metadata_as_dict()['m1'], 'v1')
     assert_equal(n.get_metadata_as_dict()['m2'], '121')
@@ -204,7 +204,7 @@ def test_save_load():
     
     # Check Metadata
     n.update_metadata({'nb':123})
-    assert_true(c.get_connectome_network()[0].get_metadata_as_dict().has_key('nb'))
+    assert_true('nb' in c.get_connectome_network()[0].get_metadata_as_dict())
 
     # Save and load
     save_to_cff(c, op.join(TMP, 'test.cff'))
@@ -215,7 +215,7 @@ def test_save_load():
     assert_equal(c2.get_connectome_meta().get_generator(), 'cfflib')
     assert_equal(c2.get_connectome_meta().get_version(), '2.0')
     assert_equal(c2.get_connectome_network()[0].get_src(), 'CNetwork/graphml_net.graphml')
-    assert_true(c2.get_connectome_network()[0].get_metadata_as_dict().has_key('nb'))
+    assert_true('nb' in c2.get_connectome_network()[0].get_metadata_as_dict())
 # ---------------------------------------------------------------------------------- #
 
 
@@ -236,7 +236,7 @@ def test_cvolume_nifti1():
     v2.update_metadata({'m0':123})
     assert_equal(v2.get_name(), 'Second volume')
     assert_not_equal(v2.get_metadata_as_dict(), {})
-    assert_true(v2.get_metadata_as_dict().has_key('m0'))
+    assert_true('m0' in v2.get_metadata_as_dict())
     assert_equal(v2.get_metadata_as_dict()['m0'], '123')
     
     # Check classmethod
@@ -281,7 +281,7 @@ def test_ctrack_trk():
     t = CTrack('Spec tracks')
     t.update_metadata({'fib':1})
     assert_equal(t.get_name(), 'Spec tracks')
-    assert_true(t.get_metadata_as_dict().has_key('fib'))
+    assert_true('fib' in t.get_metadata_as_dict())
     assert_equal(t.get_metadata_as_dict()['fib'], '1')
     
     # 
@@ -317,7 +317,7 @@ def test_ctimeserie_hdf5():
     t = CTimeseries('Spec timeserie')
     t.update_metadata({'ts':'val'})
     assert_equal(t.get_name(), 'Spec timeserie')
-    assert_true(t.get_metadata_as_dict().has_key('ts'))
+    assert_true('ts' in t.get_metadata_as_dict())
     assert_equal(t.get_metadata_as_dict()['ts'], 'val')
     
     # Check classmethod from hdf5
@@ -349,7 +349,7 @@ def test_csurface_gifti():
     s = CSurface('Spec surface')
     s.update_metadata({'surf':'ace'})
     assert_equal(s.get_name(), 'Spec surface')
-    assert_true(s.get_metadata_as_dict().has_key('surf'))
+    assert_true('surf' in s.get_metadata_as_dict())
     assert_equal(s.get_metadata_as_dict()['surf'], 'ace')
     
     # Check classmethod from gifti
