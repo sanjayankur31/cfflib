@@ -4,6 +4,7 @@ import os.path as op
 import os
 import json
 import pickle
+import nibabel as ni
 
 # NumPy
 try:
@@ -40,7 +41,7 @@ except:
 
 DEBUG_msg = True
 
-import cfflib2 as cf
+import cfflib.cfflib2 as cf
 
 xnat_interface = None
 
@@ -528,7 +529,7 @@ def unify(t, n):
     return '%s/%s' % (t, n)
 
 
-import urllib2
+import urllib
 
 def download(url, fileName=None):
     def getFileName(url,openUrl):

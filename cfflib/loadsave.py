@@ -3,7 +3,7 @@
 #import cfflib_modified as cfflib
 #import cfflib
 
-import cfflib2 as cf
+import cfflib.cfflib2 as cf
 
 import os.path as op
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -25,7 +25,7 @@ def load(filename):
     files respectively.
     """
 
-    if isinstance(filename, basestring):
+    if isinstance(filename, str):
         # check if file exists
         from os.path import isfile, abspath
         

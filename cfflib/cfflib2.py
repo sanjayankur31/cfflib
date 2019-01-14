@@ -7,14 +7,14 @@
 ### My Imports
 
 import warnings
-from util import *
-from cff import showIndent, quote_xml, tag
+from cfflib.util import *
+from cfflib.cff import showIndent, quote_xml, tag
 import tempfile
 import os.path as op
 import os
 
 import sys
-import cff as supermod
+import cfflib.cff as supermod
 
 etree_ = None
 Verbose_import_ = False
@@ -333,7 +333,7 @@ class connectome(supermod.connectome):
             ele.parent_cfile = self
 
     def to_xml(self):
-        from StringIO import StringIO
+        from io import StringIO
         re = StringIO()
         re.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         ns = """xmlns="http://www.connectomics.org/cff-2"
@@ -1583,8 +1583,8 @@ def parse(inFilename):
 
 
 def parseString(inString):
-    from StringIO import StringIO
-    doc = parsexml_(StringIO(inString))
+    from io import BytesIO
+    doc = parsexml_(BytesIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
