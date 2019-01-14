@@ -399,7 +399,7 @@ def test_cdata():
     d.load()
     assert_true(hasattr(d,'data'))
     if hasattr(d,'data'):
-        assert_not_equal(d.data, None)
+        assert_not_equal(d.data.any(), None)
         
     # Check HDF5
     #d            = CData('data hdf5')
