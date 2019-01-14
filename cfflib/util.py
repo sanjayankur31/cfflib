@@ -133,10 +133,10 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
 
         for ele in all_local_cobj:
             if DEBUG_msg:
-                print("Working on element %s", ele.name)
+                print("Working on element {}", ele.name)
             if (ele in remote_connectome.get_all() and overwrite) or  ele not in remote_connectome.get_all():
                 if DEBUG_msg:
-                    print("We push element %s", ele.name)
+                    print("We push element {}", ele.name)
                     print("Element in remote? " + str(ele in remote_connectome.get_all()))
 
                 # push connectome object to remote
@@ -146,7 +146,7 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
                     quote_for_xnat(ele.name) + ele.get_file_ending()
                     )
                 if DEBUG_msg:
-                    print("uri %s", cobj_uri)
+                    print("uri {}", cobj_uri)
                 # insert data file to xnat
                 xnat_interface.select(cobj_uri).insert(ele.get_abs_path(), experiments = 'xnat:imageSessionData', \
                     assessors = 'xnat:imageAssessorData', use_label=True)
@@ -156,7 +156,7 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
             else:
                 # we do not push
                 if DEBUG_msg:
-                    print("We do nothing with element %s (already on remote and no overwrite)", ele.name)
+                    print("We do nothing with element {} (already on remote and no overwrite)", ele.name)
 
 
         # synchronize meta_cml
@@ -187,7 +187,7 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
         all_local_cobj = connectome_obj.get_all()
 
         for ele in all_local_cobj:
-            print("We push element %s", ele.name)
+            print("We push element {}", ele.name)
 
             # push connectome object to remote
             cobj_uri = '%s/assessors/%s/out/resources/data/files/%s' % (
@@ -254,7 +254,7 @@ def xnat_pull( projectid, subjectid, experimentid, storagepath):
     # update current connectome container
     print("=============")
     print("You can load the pulled connectome file with:")
-    print("import cfflib as cf; mycon = cf.load('%s')" % op.join(absstoragepath, 'meta.cml'))
+    print("import cfflib as cf; mycon = cf.load('{}')" % op.join(absstoragepath, 'meta.cml'))
     print("=============")
 
     return True
@@ -493,7 +493,7 @@ def load_data(obj):
         _zipfile = ZipFile(obj.parent_cfile.src, 'r', ZIP_DEFLATED)
         try:
             exfile = _zipfile.extract(obj.src, tmpdir)
-            print("Loading file. Created temporary file: %s", exfile)
+            print("Loading file. Created temporary file: {}", exfile)
             obj.tmpsrc = exfile
             _zipfile.close()
             retload = load(exfile)
@@ -508,7 +508,7 @@ def load_data(obj):
     else:
         if hasattr(obj, 'tmpsrc'):
             # we have an absolute path
-            print("Load object: %s", obj.tmpsrc)
+            print("Load object: {}", obj.tmpsrc)
             obj.tmpsrc = obj.tmpsrc
             retload = load(obj.tmpsrc)
             print("Succeed.")
@@ -516,7 +516,7 @@ def load_data(obj):
         else:
             # otherwise, we need to join the meta.cml path with the current relative path
             path2file = op.join(op.dirname(obj.parent_cfile.fname), obj.src)
-            print("Load object: %s", path2file)
+            print("Load object: {}", path2file)
             obj.tmpsrc = path2file
             retload = load(path2file)
             print("Succeed.")

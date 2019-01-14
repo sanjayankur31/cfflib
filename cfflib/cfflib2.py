@@ -361,7 +361,7 @@ class connectome(supermod.connectome):
                 if save:
                     ele.save()
                 # remove .data and .tmpsrc
-                print("Will not remove file %s from file system", ele.tmpsrc)
+                print("Will not remove file {} from file system", ele.tmpsrc)
                 print("Remove .data attribute")
                 del ele.data
                 print("Remove .tmpsrc attribute")
@@ -918,7 +918,7 @@ class CBaseClass(object):
         rval = save_data(self)
         if not rval == '':
             self.tmpsrc = rval
-            print("Updated storage path of file: %s", rval)
+            print("Updated storage path of file: {}", rval)
         else:
             print('There is nothing to save.')
 

@@ -155,14 +155,14 @@ def save_to_cff(connectome, filename):
         if hasattr(ele, 'src'):
             if ele.src == '':
                 wt = ele.get_unique_relpath()
-                print("Created a unique path for element %s: %s", str(ele), wt)
+                print("Created a unique path for element %s: {}", str(ele), wt)
             else:
                 wt = ele.src
-                print("Used .src attribute for relative path: %s", wt)
+                print("Used .src attribute for relative path: {}", wt)
         else:            
             ele.src = ele.get_unique_relpath()
             wt = ele.src
-            print("Element has no .src attribute. Create it and set it to %s", ele.src)
+            print("Element has no .src attribute. Create it and set it to {}", ele.src)
         
         if not hasattr(ele, 'data'):
             
@@ -242,5 +242,5 @@ def save_to_cff(connectome, filename):
     
     _newzip.close()
     
-    print("New connectome file written to %s ", op.abspath(filename))
+    print("New connectome file written to {} ", op.abspath(filename))
     
