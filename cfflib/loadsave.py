@@ -115,10 +115,10 @@ def _load_from_cff(filename, *args, **kwargs):
 def save_to_meta_cml(connectome, filename = 'meta.cml'):
     """ Stores a Connectome Markup File to filename """
     if connectome.get_connectome_meta() == None:
-        print "ERROR - there is no connectome metadata in this connectome"
+        print("ERROR - there is no connectome metadata in this connectome")
         return
     elif connectome.get_connectome_meta().title == None or connectome.get_connectome_meta().title == '':
-        print "ERROR - the connectome metadata have to contain a unique title"
+        print("ERROR - the connectome metadata have to contain a unique title")
         return
     f = open(filename, 'w')
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -129,10 +129,10 @@ def save_to_meta_cml(connectome, filename = 'meta.cml'):
 def save_to_cff(connectome, filename):
     """ Save connectome file to new .cff file on disk """
     if connectome.get_connectome_meta() == None:
-        print "ERROR - there is no connectome metadata in this connectome"
+        print("ERROR - there is no connectome metadata in this connectome")
         return
     elif connectome.get_connectome_meta().title == None or connectome.get_connectome_meta().title == '':
-        print "ERROR - the connectome metadata have to contain a unique title"
+        print("ERROR - the connectome metadata have to contain a unique title")
         return
     
     _newzip = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64 = True)
@@ -148,21 +148,21 @@ def save_to_cff(connectome, filename):
     connectome.check_names_unique()
 
     for ele in allcobj:
-        print "----"
-        print "Storing element: ", str(ele)
+        print("----")
+        print("Storing element: " + str(ele))
         
         # discover the relative path to use for the save
         if hasattr(ele, 'src'):
             if ele.src == '':
                 wt = ele.get_unique_relpath()
-                print "Created a unique path for element %s: %s" % (str(ele), wt)
+                print("Created a unique path for element %s: %s", str(ele), wt)
             else:
                 wt = ele.src
-                print "Used .src attribute for relative path: %s" % wt
+                print("Used .src attribute for relative path: %s", wt)
         else:            
             ele.src = ele.get_unique_relpath()
             wt = ele.src
-            print "Element has no .src attribute. Create it and set it to %s" % ele.src
+            print("Element has no .src attribute. Create it and set it to %s", ele.src)
         
         if not hasattr(ele, 'data'):
             
@@ -242,5 +242,5 @@ def save_to_cff(connectome, filename):
     
     _newzip.close()
     
-    print "New connectome file written to %s " % op.abspath(filename)
+    print("New connectome file written to %s ", op.abspath(filename))
     

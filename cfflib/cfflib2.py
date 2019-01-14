@@ -361,10 +361,10 @@ class connectome(supermod.connectome):
                 if save:
                     ele.save()
                 # remove .data and .tmpsrc
-                print "Will not remove file %s from file system" % ele.tmpsrc
-                print "Remove .data attribute"
+                print("Will not remove file %s from file system", ele.tmpsrc)
+                print("Remove .data attribute")
                 del ele.data
-                print "Remove .tmpsrc attribute"
+                print("Remove .tmpsrc attribute")
                 del ele.tmpsrc
     
     # CMetadata setter
@@ -918,9 +918,9 @@ class CBaseClass(object):
         rval = save_data(self)
         if not rval == '':
             self.tmpsrc = rval
-            print "Updated storage path of file: %s" % rval
+            print("Updated storage path of file: %s", rval)
         else:
-            print 'There is nothing to save.'
+            print('There is nothing to save.')
 
     # Metadata
     def load(self, custom_loader = None):
@@ -982,7 +982,7 @@ class CBaseClass(object):
         
         # Print or return
         if printer:
-            print s
+            print(s)
         else:
             return s
     
@@ -1026,7 +1026,7 @@ class CNetwork(supermod.CNetwork, CBaseClass):
         """
         super(CNetwork, self).__init__(src, dtype, name, fileformat, metadata, description, )
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1146,7 +1146,7 @@ class CSurface(supermod.CSurface, CBaseClass):
         """
         super(CSurface, self).__init__(src, dtype, name, fileformat, description, metadata, )
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1222,7 +1222,7 @@ class CVolume(supermod.CVolume, CBaseClass):
         """
         super(CVolume, self).__init__(src, dtype, name, fileformat, description, metadata, )
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1304,7 +1304,7 @@ class CTrack(supermod.CTrack, CBaseClass):
     def __init__(self, name=None, src=None, fileformat='TrackVis', dtype = None, description=None, metadata=None):
         super(CTrack, self).__init__(src, dtype, name, fileformat, description, metadata, )        
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1339,7 +1339,7 @@ class CTimeseries(supermod.CTimeseries, CBaseClass):
     def __init__(self, name=None, src=None, dtype=None, fileformat='HDF5', description=None, metadata=None):
         super(CTimeseries, self).__init__(src, dtype, name, fileformat, description, metadata, )
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1365,7 +1365,7 @@ class CData(supermod.CData, CBaseClass):
     def __init__(self, name=None, src=None, dtype=None, fileformat=None, description=None, metadata=None):
         super(CData, self).__init__(src, dtype, name, fileformat, description, metadata, )
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1401,7 +1401,7 @@ class CScript(supermod.CScript, CBaseClass):
     def __init__(self, name=None, src=None, dtype='Python', fileformat='UTF-8', description=None, metadata=None):
         super(CScript, self).__init__(src, dtype, name, fileformat, description, metadata, )
         if not src is None and os.path.exists(src):
-            print "File given by src exists. Create a new relative path."
+            print("File given by src exists. Create a new relative path.")
             self.tmpsrc = src
             self.src = self.get_unique_relpath()
 
@@ -1626,7 +1626,7 @@ Usage: python ???.py <infilename>
 """
 
 def usage():
-    print USAGE_TEXT
+    print(USAGE_TEXT)
     sys.exit(1)
 
 

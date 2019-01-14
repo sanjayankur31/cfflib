@@ -132,12 +132,11 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
 
         for ele in all_local_cobj:
             if DEBUG_msg:
-                print "Working on element %s" % ele.name
-            if (ele in remote_connectome.get_all() and overwrite) or \
-                not ele in remote_connectome.get_all():
+                print("Working on element %s", ele.name)
+            if (ele in remote_connectome.get_all() and overwrite) or  ele not in remote_connectome.get_all():
                 if DEBUG_msg:
-                    print "We push element %s" % ele.name
-                    print "Element in remote? " + str(ele in remote_connectome.get_all())
+                    print("We push element %s", ele.name)
+                    print("Element in remote? " + str(ele in remote_connectome.get_all()))
 
                 # push connectome object to remote
                 cobj_uri = '%s/assessors/%s/out/resources/data/files/%s' % (
@@ -146,7 +145,7 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
                     quote_for_xnat(ele.name) + ele.get_file_ending()
                     )
                 if DEBUG_msg:
-                    print "uri", cobj_uri
+                    print("uri %s", cobj_uri)
                 # insert data file to xnat
                 xnat_interface.select(cobj_uri).insert(ele.get_abs_path(), experiments = 'xnat:imageSessionData', \
                     assessors = 'xnat:imageAssessorData', use_label=True)
@@ -156,7 +155,7 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
             else:
                 # we do not push
                 if DEBUG_msg:
-                    print "We do nothing with element %s (already on remote and no overwrite)" % ele.name
+                    print("We do nothing with element %s (already on remote and no overwrite)", ele.name)
 
 
         # synchronize meta_cml
@@ -176,9 +175,9 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
         _push_metacml(experiment_uri)
 
         if DEBUG_msg:
-            print "Current local connectome container", connectome_obj.to_xml()
-            print "Current remote connectome container", remote_connectome.to_xml()
-            print "Current push objects", push_objects
+            print("Current local connectome container" + connectome_obj.to_xml())
+            print("Current remote connectome container" + remote_connectome.to_xml())
+            print("Current push objects" + push_objects)
 
     else:
         # create meta.cml
@@ -187,7 +186,7 @@ def xnat_push(connectome_obj, projectid, subjectid, experimentid, overwrite = Fa
         all_local_cobj = connectome_obj.get_all()
 
         for ele in all_local_cobj:
-            print "We push element %s" % ele.name
+            print("We push element %s", ele.name)
 
             # push connectome object to remote
             cobj_uri = '%s/assessors/%s/out/resources/data/files/%s' % (
@@ -228,7 +227,7 @@ def xnat_pull( projectid, subjectid, experimentid, storagepath):
     remote_connectome = cf.parseString(f.read())
     f.close()
     if DEBUG_msg:
-        print "Remote connectome", remote_connectome.to_xml()
+        print("Remote connectome" + remote_connectome.to_xml())
 
     # loop over objects and download them to pyxnat cache / or path
     for ele in remote_connectome.get_all():
@@ -315,11 +314,11 @@ def save_data(obj):
             os.makedirs(dname)
 
         if 'CVolume' in objrep:
-            print "Saving CVolume ..."
+            print("Saving CVolume ...")
             ni.save(obj.data, tmpfname)
-            print "Done."
+            print("Done.")
         elif 'CNetwork' in objrep:
-            print "Saving CNetwork"
+            print("Saving CNetwork")
             if obj.fileformat == "GraphML":
                 # write graph to temporary file
                 nx.write_graphml(obj.data, tmpfname)
@@ -329,7 +328,7 @@ def save_data(obj):
                 nx.write_gpickle(obj.data, tmpfname)
             else:
                 raise NotSupportedFormat("Other", str(obj))
-            print "Done."
+            print("Done.")
 
         elif 'CSurface' in objrep:
             if obj.fileformat == "Gifti":
@@ -396,7 +395,7 @@ def save_data(obj):
         # valid for iszip = True and iszip = False
         # either path to the .cff or to the meta.cml
         # return op.join(op.dirname(obj.parent_cfile.fname), obj.src)
-        print "Connectome Object is not loaded. Nothing to save."
+        print("Connectome Object is not loaded. Nothing to save.")
         return ''
 
 
@@ -493,11 +492,11 @@ def load_data(obj):
         _zipfile = ZipFile(obj.parent_cfile.src, 'r', ZIP_DEFLATED)
         try:
             exfile = _zipfile.extract(obj.src, tmpdir)
-            print "Loading file. Created temporary file: %s" % exfile
+            print("Loading file. Created temporary file: %s", exfile)
             obj.tmpsrc = exfile
             _zipfile.close()
             retload = load(exfile)
-            print "Succeed."
+            print("Succeed.")
             return retload
         except: # XXX: what is the correct exception for read error?
             raise RuntimeError('Can not extract "%s" from connectome file using path %s. Please extract .cff and load meta.cml directly.' % (str(obj.name), str(obj.src)) )
@@ -508,18 +507,18 @@ def load_data(obj):
     else:
         if hasattr(obj, 'tmpsrc'):
             # we have an absolute path
-            print "Load object: %s" % obj.tmpsrc
+            print("Load object: %s", obj.tmpsrc)
             obj.tmpsrc = obj.tmpsrc
             retload = load(obj.tmpsrc)
-            print "Succeed."
+            print("Succeed.")
             return retload
         else:
             # otherwise, we need to join the meta.cml path with the current relative path
             path2file = op.join(op.dirname(obj.parent_cfile.fname), obj.src)
-            print "Load object: %s" % path2file
+            print("Load object: %s", path2file)
             obj.tmpsrc = path2file
             retload = load(path2file)
-            print "Succeed."
+            print("Succeed.")
             return retload
 
 def unify(t, n):
